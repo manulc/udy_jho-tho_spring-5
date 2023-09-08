@@ -1,0 +1,11 @@
+docker run -it --rm -p 8161:8161 -p 61616:61616 vromero/activemq-artemis
+docker run -d --rm --name mymongodb -p 27017:27017 mongo:5.0.6
+docker run -d --rm --name mymysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=springboot_mysql_example mysql:8
+docker run -d --rm --name mypostgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres@123 -e POSTGRES_DB=springbootdb postgres:14-alpine
+docker run -d --rm --name mymariadb -p 3306:3306 -e MARIADB_ROOT_PASSWORD=root -e MARIADB_DATABASE=springboot_mariadb mariadb:11
+docker run -d --rm --name myredis -p 6379:6379 redis:6.2-alpine
+docker run -d --rm --name myrabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9.11-management-alpine
+docker run -d --rm --name myneo4j -p 7474:7474 -p 7687:7687 neo4j:3.1.9
+docker container run -d --rm --name mycassandra -p 9042:9042 cassandra:3.0.17
+docker container run -d --rm --privileged=true --name mydb2 -p 50000:50000 -e LICENSE=accept -e DB2INST1_PASSWORD=db2inst1-pwd -e DBNAME=testdb ibmcom/db2:11.5.0.0
+docker container run -d --rm --name myoracledb -p 1521:1521 container-registry.oracle.com/database/enterprise:12.2.0.1-slim

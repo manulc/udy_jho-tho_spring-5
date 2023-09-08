@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	
+	<groupId>com.mlorenzo</groupId>
+	<artifactId>spring5-pet-clinic</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spring5-pet-clinic</name>
+	<description>SFG Pet Clinic Project</description>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+	</properties>
+	
+	<modules>
+		<module>pet-clinic-data</module>
+		<module>pet-clinic-web</module>
+	</modules>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- Agregamos este plugin para automatizar el proceso de generación de releases de esta aplicación en el repositorio remoto(Por ejemplo, uno de GitHub) que indiquemos en la etiqueta "developerConnection" dentro de la etiqueta "scm".
+			     La creación de una release se lleva a cabo en 2 etapas del plugin. La etapa "prepare" crea un tag y su correspondiente release en el repositorio remoto configurado y la etapa "perform" hace lo mismo pero en el repositorio de Maven que usemos.
+			     Primero debe ejecutarse la etapa "prepare" con el comando "mvn release:prepare" y, después, la etapa "perform" con el comando "mvn release:perform".
+			     Cuando se solicite preparar una nueva release, medinate la ejecución de la tarea "prepare" del plugin, éste realizará una serie de preguntas al usuario, mediante la línea de comandos, sobre la versión de la siguiente release(versiones para los módulos padre e hijos) y sobre la versión del siguiente snapshot.
+			     A partir de las versiones dadas por el usuario en las preguntas, este plugin actualizará de forma automática los archivos pom correspondientes(módulos padres e hijos).
+				 La propiedad "autoVersionSubmodules" igual a true(Si no se indica, por defecto es false) es para indicar al plugin que directamente use la versión indicada por el usuario para el módulo padre en los módulos hijos. En caso contrario, el plugin preguntará también al usuario por las versiones de los módulos hijos. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<!-- Para que la etapa "perform" de este plugin utilice la etapa "install" de Maven para instalar las releases en el repositorio de Maven.
+					     Si no se indica, la etapa "perform" de este plugin utilizará la etapa "deploy" de Maven(configuración por defecto). -->
+					<goals>install</goals>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<scm>
+	    <!-- Aquí indicamos la url de nuestro repositorio remoto(En este caso, uno de Github) requerido por la etapa "prepare" del plugin "maven-release-plugin" -->
+		<developerConnection>scm:git:https://github.com/manulc50/spring5-pet-clinic.git</developerConnection>
+		<!-- Esta etiqueta es creada y autogestionada por el plugin maven-release-plugin -->
+    	<tag>HEAD</tag>
+  	</scm>
+
+</project>

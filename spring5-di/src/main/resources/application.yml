@@ -1,0 +1,24 @@
+spring:
+  profiles:
+    #active: cat,EN,prod
+    # También acepta una lista de Strings que se puede indicar de 2 maneras
+    #active: [cat,EN,prod]
+    active:
+      - cat
+      - EN
+      - dev
+
+guru:
+  username: superuser
+  password: dbPassword
+  jdbc-url: someUrlForDB
+---
+# Es como si fuera otro archivo YAML o YML
+# Con YAML o YML podemos definir propiedades para varios perfiles en un úncio archivo de esta manera
+# YAML para el perfil "prod"
+spring:
+  profiles: prod
+guru:
+  username: YmlProdUserName
+  password: YmlProdPassword
+  jdbc-url: YmlProdUrl 
